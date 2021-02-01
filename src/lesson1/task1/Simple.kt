@@ -59,7 +59,7 @@ fun main() {
  * Пользователь задает время в часах, минутах и секундах, например, 8:20:35.
  * Рассчитать время в секундах, прошедшее с начала суток (30035 в данном случае).
  */
-fun seconds(hours: Int, minutes: Int, seconds: Int): Int = TODO()
+fun seconds(hours: Int, minutes: Int, seconds: Int): Int = (hours * 3600) + (minutes * 60) + seconds
 
 /**
  * Тривиальная
@@ -68,7 +68,7 @@ fun seconds(hours: Int, minutes: Int, seconds: Int): Int = TODO()
  * Определить длину того же отрезка в метрах (в данном случае 18.98).
  * 1 сажень = 3 аршина = 48 вершков, 1 вершок = 4.445 см.
  */
-fun lengthInMeters(sagenes: Int, arshins: Int, vershoks: Int): Double = TODO()
+fun lengthInMeters(sagenes: Int, arshins: Int, vershoks: Int): Double = ((sagenes * 48) + (arshins * 48 / 3) + vershoks) * 4.445/100
 
 /**
  * Тривиальная
@@ -101,7 +101,9 @@ fun thirdDigit(number: Int): Int = TODO()
  * прибыл на станцию назначения в h2 часов m2 минут того же дня (например в 13:01).
  * Определите время поезда в пути в минутах (в данном случае 216).
  */
-fun travelMinutes(hoursDepart: Int, minutesDepart: Int, hoursArrive: Int, minutesArrive: Int): Int = TODO()
+fun travelMinutes(hoursDepart: Int, minutesDepart: Int, hoursArrive: Int, minutesArrive: Int): Int = (hoursArrive - hoursDepart) * 60 +
+        minutesArrive - minutesDepart
+
 
 /**
  * Простая
@@ -110,7 +112,14 @@ fun travelMinutes(hoursDepart: Int, minutesDepart: Int, hoursArrive: Int, minute
  * Сколько денег будет на счету через 3 года (с учётом сложных процентов)?
  * Например, 100 рублей под 10% годовых превратятся в 133.1 рубля
  */
-fun accountInThreeYears(initial: Int, percent: Int): Double = TODO()
+fun accountInThreeYears(initial: Int, percent: Int): Double
+{
+    val dProc: Double = 1.0 + (percent.toDouble() / 100.0)
+    val SumProc: Double = dProc * dProc * dProc
+    println("Sum Proc: $SumProc")
+    val Total: Double = initial.toDouble() * SumProc
+    return Total
+}
 
 /**
  * Простая
@@ -118,4 +127,12 @@ fun accountInThreeYears(initial: Int, percent: Int): Double = TODO()
  * Пользователь задает целое трехзначное число (например, 478).
  * Необходимо вывести число, полученное из заданного перестановкой цифр в обратном порядке (например, 874).
  */
-fun numberRevert(number: Int): Int = TODO()
+fun numberRevert(number: Int): Int {
+    val ones: Int = number / 100
+    println("Hunreds: $ones ($number)")
+    val dec: Int = (number - ones * 100) / 10
+    println("Decimal: $dec")
+    val hundry: Int = number - ones * 100 - dec * 10
+    println("Ones: $hundry")
+    return hundry * 100 + dec * 10 + ones
+}
